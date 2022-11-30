@@ -18,7 +18,7 @@ type MongoField struct {
 }
 
 func main() {
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+	clientOptions := options.Client().ApplyURI("mongodb://user:password@localhost:27017/?authSource=admin")
 	fmt.Println("ClientOptopm TYPE:", reflect.TypeOf(clientOptions), "\n")
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
@@ -28,7 +28,7 @@ func main() {
 	}
 	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
 
-	col := client.Database("First_Database").Collection("First COllection")
+	col := client.Database("Database_name").Collection("Collection_name")
 	fmt.Println("Collection Type: ", reflect.TypeOf(col), "\n")
 
 	oneDoc := MongoField{
